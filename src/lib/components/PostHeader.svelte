@@ -24,7 +24,7 @@
 	<div class="mb-8 md:mb-16 -mx-5 sm:mx-0">
 		<CoverImage {title} responsiveImage={coverImage.responsiveImage} />
 	</div>
-{/if}}
+{/if}
 
 <div class="max-w-2xl mx-auto">
 	{#if author}
