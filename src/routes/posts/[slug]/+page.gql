@@ -23,6 +23,7 @@ query PostContent($slug: String) {
 					id
 					image {
 						responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+							base64
 							src
 							width
 							height
