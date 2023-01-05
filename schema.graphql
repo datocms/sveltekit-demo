@@ -8,11 +8,9 @@ input AuthorModelFilter {
   _status: StatusFilter
   _unpublishingScheduledAt: PublishedAtFilter
   _updatedAt: UpdatedAtFilter
-  createdAt: CreatedAtFilter
   id: ItemIdFilter
   name: StringFilter
   picture: FileFilter
-  updatedAt: UpdatedAtFilter
 }
 
 enum AuthorModelOrderBy {
@@ -32,14 +30,10 @@ enum AuthorModelOrderBy {
   _unpublishingScheduledAt_DESC
   _updatedAt_ASC
   _updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
   id_ASC
   id_DESC
   name_ASC
   name_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 """Record of type Author (author)"""
@@ -59,11 +53,9 @@ type AuthorRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
-  createdAt: DateTime!
   id: ItemId!
   name: String
   picture: FileField
-  updatedAt: DateTime!
 }
 
 """Record of type Blog (blog)"""
@@ -83,10 +75,8 @@ type BlogRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
-  createdAt: DateTime!
   id: ItemId!
   seo: SeoField
-  updatedAt: DateTime!
 }
 
 """Specifies how to filter Boolean fields"""
@@ -108,11 +98,9 @@ input CategoryModelFilter {
   _status: StatusFilter
   _unpublishingScheduledAt: PublishedAtFilter
   _updatedAt: UpdatedAtFilter
-  createdAt: CreatedAtFilter
   id: ItemIdFilter
   name: StringFilter
   slug: SlugFilter
-  updatedAt: UpdatedAtFilter
 }
 
 enum CategoryModelOrderBy {
@@ -132,14 +120,10 @@ enum CategoryModelOrderBy {
   _unpublishingScheduledAt_DESC
   _updatedAt_ASC
   _updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
   id_ASC
   id_DESC
   name_ASC
   name_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 """Record of type Category (category)"""
@@ -159,11 +143,9 @@ type CategoryRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
-  createdAt: DateTime!
   id: ItemId!
   name: String
   slug: String
-  updatedAt: DateTime!
 }
 
 type CollectionMetadata {
@@ -517,10 +499,8 @@ type ImageBlockRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
-  createdAt: DateTime!
   id: ItemId!
   image: FileField
-  updatedAt: DateTime!
 }
 
 input ImgixParams {
@@ -2121,7 +2101,6 @@ input PostModelFilter {
   category: LinkFilter
   content: StructuredTextFilter
   coverImage: FileFilter
-  createdAt: CreatedAtFilter
   date: DateFilter
   excerpt: StringFilter
   id: ItemIdFilter
@@ -2129,7 +2108,6 @@ input PostModelFilter {
   seoSettings: SeoFilter
   slug: SlugFilter
   title: StringFilter
-  updatedAt: UpdatedAtFilter
 }
 
 enum PostModelOrderBy {
@@ -2149,8 +2127,6 @@ enum PostModelOrderBy {
   _unpublishingScheduledAt_DESC
   _updatedAt_ASC
   _updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
   date_ASC
   date_DESC
   excerpt_ASC
@@ -2159,8 +2135,6 @@ enum PostModelOrderBy {
   id_DESC
   title_ASC
   title_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 """Record of type Post (post)"""
@@ -2184,7 +2158,6 @@ type PostRecord implements RecordInterface {
   category: CategoryRecord
   content: PostModelContentField
   coverImage: FileField
-  createdAt: DateTime!
   date: Date
   excerpt: String
   id: ItemId!
@@ -2192,7 +2165,6 @@ type PostRecord implements RecordInterface {
   seoSettings: SeoField
   slug: String
   title: String
-  updatedAt: DateTime!
 }
 
 """Specifies how to filter by publication datetime"""
