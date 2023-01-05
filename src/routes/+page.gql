@@ -1,13 +1,17 @@
 query HomeContent {
 	site: _site {
 		favicon: faviconMetaTags {
-			...SeoFragment
+			attributes
+			content
+			tag
 		}
 	}
 
 	blog {
 		seo: _seoMetaTags {
-			...SeoFragment
+			attributes
+			content
+			tag
 		}
 	}
 
@@ -30,10 +34,4 @@ query HomeContent {
 			}
 		}
 	}
-}
-
-fragment SeoFragment on Tag {
-	attributes
-	content
-	tag
 }
