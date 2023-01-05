@@ -9,6 +9,7 @@
 		responsiveImage,
 		graphql(`
 			fragment ResponsiveImageFragment on ResponsiveImage {
+				base64
 				src
 				width
 				height
