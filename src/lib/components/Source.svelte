@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let srcset: string | undefined;
-	export let sizes: string | undefined;
-	export let type: string | undefined = undefined;
+	export let srcset: string | null;
+	export let sizes: string | null;
+	export let type: string | null = null;
 </script>
 
 <source {srcset} {sizes} {type} />

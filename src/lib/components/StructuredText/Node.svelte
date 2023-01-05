@@ -9,8 +9,10 @@
 		isParagraph,
 		isRoot,
 		isSpan,
-		type Node
+		type Node,
 	} from 'datocms-structured-text-utils';
+
+	import type { PostContent$result } from '$houdini';
 
 	import Paragraph from './nodes/Paragraph.svelte';
 	import Root from './nodes/Root.svelte';
@@ -23,9 +25,9 @@
 	import ListItem from './nodes/ListItem.svelte';
 
 	export let node: Node;
-	export let blocks;
+	export let blocks: NonNullable<NonNullable<NonNullable<PostContent$result["post"]>["content"]>["blocks"]>;
 
-	$: block = isBlock(node) ? (blocks || []).find(({ id }) => id === node.item) : null;
+	$: block = isBlock(node) && (blocks || []).find(({ id }) => isBlock(node) && id === node.item) || null;
 </script>
 
 <!-- Typescript doesn't infer the relationship between the component and `node` prop type.
@@ -37,7 +39,7 @@
 		{/each}
 	</Root>
 {:else if isParagraph(node)}
-	<Paragraph {node}>
+	<Paragraph>
 		{#each node.children as child}
 			<svelte:self node={child} {blocks} />
 		{/each}
@@ -55,7 +57,7 @@
 		{/each}
 	</List>
 {:else if isListItem(node)}
-	<ListItem {node}>
+	<ListItem>
 		{#each node.children as child}
 			<svelte:self node={child} {blocks} />
 		{/each}
@@ -67,12 +69,12 @@
 		{/each}
 	</Heading>
 {:else if isBlockquote(node)}
-	<Blockquote {node}>
+	<Blockquote>
 		{#each node.children as child}
 			<svelte:self node={child} {blocks} />
 		{/each}
 	</Blockquote>
-{:else if isBlock(node)}
+{:else if isBlock(node) && block}
 	<Block {block} />
 {:else if isSpan(node)}
 	<Span {node} />

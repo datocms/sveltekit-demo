@@ -19,8 +19,8 @@
 		`)
 	);
 
-	export let title: string;
-	export let slug: string | null | undefined = undefined;
+	export let title: string | null = null;
+	export let slug: string | null = null;
 </script>
 
 <div class="-mx-5 sm:mx-0">

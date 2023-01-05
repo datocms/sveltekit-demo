@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { SeoMetaTagType } from '$lib/server/types';
-
-	export let headTags: SeoMetaTagType[] = [];
+	export let headTags: { tag: string; content: string | null; attributes: {} | null; }[] = [];
 
 	$: titleTag = headTags && headTags.find((t) => t.tag === 'title');
 	$: metaTags = headTags ? headTags.filter((t) => t.tag === 'meta') : [];

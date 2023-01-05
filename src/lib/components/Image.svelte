@@ -125,24 +125,26 @@
 
 	let loaded = false;
 
+	export let alt: string | null = null;
+
 	/** The actual response you get from a DatoCMS `responsiveImage` GraphQL query */
 	export let data: ResponsiveImageType;
 
 	/** Additional CSS className for root node */
-	let klass: string | null | undefined = undefined;
+	let klass: string | null = null;
 	export { klass as class };
 
 	/** Additional CSS class for the image inside the `<picture />` tag */
-	export let pictureClass: string | null | undefined = undefined;
+	export let pictureClass: string | null = null;
 
 	/** Duration (in ms) of the fade-in transition effect upoad image loading */
 	export let fadeInDuration: number = 500;
 
 	/** Indicate at what percentage of the placeholder visibility the loading of the image should be triggered. A value of 0 means that as soon as even one pixel is visible, the callback will be run. A value of 1.0 means that the threshold isn't considered passed until every pixel is visible */
-	export let intersectionThreshold: number | null | undefined = undefined;
+	export let intersectionThreshold: number = 0;
 
 	/** Margin around the placeholder. Can have values similar to the CSS margin property (top, right, bottom, left). The values can be percentages. This set of values serves to grow or shrink each side of the placeholder element's bounding box before computing intersections */
-	export let intersectionMargin: string | null | undefined = undefined;
+	export let intersectionMargin: string = "0px";
 
 	/** Whether enable lazy loading or not */
 	let rawLazyLoad = true;
@@ -152,7 +154,7 @@
 	export let style: Record<string, any> = {};
 
 	/** Additional CSS rules to add to the image inside the `<picture />` tag */
-	export let pictureStyle: string | null | undefined = undefined;
+	export let pictureStyle: string | null = null;
 
 	/**
 	 * The layout behavior of the image as the viewport changes size
@@ -182,7 +184,7 @@
 	 * -> https://web.dev/learn/design/responsive-images/#sizes
 	 * -> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes
 	 **/
-	export let sizes: HTMLImageElement['sizes'] | undefined = undefined;
+	export let sizes: HTMLImageElement['sizes'] | null = null;
 
 	/**
 	 * When true, the image will be considered high priority. Lazy loading is automatically disabled, and fetchpriority="high" is added to the image.
@@ -217,7 +219,7 @@
 	let transition = fadeInDuration > 0 ? `opacity ${fadeInDuration}ms` : undefined;
 </script>
 
-<IntersectionObserver {element} bind:intersecting>
+<IntersectionObserver {element} bind:intersecting threshold={intersectionThreshold} rootMargin={intersectionMargin}>
 	<div
 		bind:this={element}
 		class={klass}
@@ -247,19 +249,19 @@
 				{#if data.webpSrcSet}
 					<Source
 						srcset={data.webpSrcSet}
-						sizes={sizes ?? data.sizes ?? undefined}
+						sizes={sizes ?? data.sizes ?? null}
 						type="image/webp"
 					/>
 				{/if}
 				<Source
-					srcset={data.srcSet ?? buildSrcSet(data.src, data.width, srcSetCandidates)}
-					sizes={sizes ?? data.sizes ?? undefined}
+					srcset={data.srcSet ?? buildSrcSet(data.src, data.width, srcSetCandidates) ?? null}
+					sizes={sizes ?? data.sizes ?? null}
 				/>
 				{#if data.src}
 					<img
 						src={data.src}
-						alt={data.alt ?? ''}
-						title={data.title ?? undefined}
+						alt={alt ?? data.alt ?? ''}
+						title={data.title ?? null}
 						on:load={() => {
 							dispatch('load');
 							loaded = true;

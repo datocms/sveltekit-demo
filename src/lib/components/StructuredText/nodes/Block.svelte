@@ -1,7 +1,9 @@
 <script lang="ts">
+	import type { PostContent$result } from '$houdini';
+	
 	import ImageBlockRecord from '../blocks/ImageBlockRecord.svelte';
 
-	export let block;
+	export let block: NonNullable<NonNullable<NonNullable<PostContent$result["post"]>["content"]>["blocks"]>[number];
 
 	$: ({ __typename } = block);
 

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type * as CSS from 'csstype';
 
-	export let base64: string | null | undefined = undefined;
-	export let backgroundColor: string | null | undefined = undefined;
+	export let base64: string | null = null;
+	export let backgroundColor: string | null = null;
 	export let objectFit: CSS.Properties['objectFit'];
 	export let objectPosition: CSS.Properties['objectPosition'];
 	export let showImage: boolean;

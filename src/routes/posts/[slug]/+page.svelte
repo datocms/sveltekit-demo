@@ -12,9 +12,13 @@
 	export let data: PageData;
 
 	$: ({ PostContent } = data);
-	$: ({ site, post, morePosts } = $PostContent.data);
+	$: ({ site, post, morePosts } = $PostContent.data || {
+		site: null,
+		post: null,
+		morePosts: [],
+	});
 
-	$: headTags = post.seo.concat(site.favicon);
+	$: headTags = post && site ? post.seo.concat(site.favicon) : [];
 </script>
 
 <Head {headTags} />
@@ -23,14 +27,17 @@
 	<Header />
 
 	<article>
-		<PostHeader
-			title={post.title}
-			coverImage={post.coverImage}
-			date={post.date}
-			author={post.author}
-		/>
-		{#if post.content}
-			<PostBody content={post.content} />
+		{#if post}			
+			<PostHeader
+				title={post.title}
+				coverImage={post.coverImage}
+				date={post.date}
+				author={post.author}
+			/>
+
+			{#if post.content}
+				<PostBody content={post.content} />
+			{/if}
 		{/if}
 	</article>
 

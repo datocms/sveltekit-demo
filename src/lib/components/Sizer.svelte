@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { encode } from 'universal-base64';
 
-	let klass: string | null | undefined = undefined;
+	let klass: string | null = null;
 
 	export { klass as class };
 	export let width: number;

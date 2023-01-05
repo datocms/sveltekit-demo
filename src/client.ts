@@ -2,7 +2,7 @@ import { HoudiniClient, type RequestHandler } from '$houdini';
 
 import { PUBLIC_DATOCMS_API_TOKEN } from '$env/static/public';
 
-const requestHandler: RequestHandler = async ({ fetch, text = '', variables = {}, metadata }) => {
+const requestHandler: RequestHandler = async ({ fetch, text = '', variables = {} }) => {
 	const url = 'https://graphql.datocms.com';
 	const result = await fetch(url, {
 		method: 'POST',
