@@ -13,6 +13,7 @@
 </script>
 
 <img
+	class="placeholder"
 	role="presentation"
 	aria-hidden="true"
 	alt=""
@@ -22,5 +23,13 @@
 	style:objectPosition
 	style:transition
 	style:opacity
-	style="position: absolute; left: -5%; top: -5%; width: 110%; height: 110%"
 />
+
+<style>
+	.placeholder {
+		position: absolute;
+		width: 100%;
+		top: 0;
+		scale: 110%;
+	}
+</style>

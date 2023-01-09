@@ -114,9 +114,9 @@
 
 	import { browser } from '$app/environment';
 
-	import Sizer from './Sizer.svelte';
-	import Placeholder from './Placeholder.svelte';
-	import Source from './Source.svelte';
+	import Sizer from './Image/Sizer.svelte';
+	import Placeholder from './Image/Placeholder.svelte';
+	import Source from './Image/Source.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -245,7 +245,7 @@
 		{/if}
 
 		{#if addImage}
-			<picture>
+			<picture style={pictureStyle}>
 				{#if data.webpSrcSet}
 					<Source
 						srcset={data.webpSrcSet}

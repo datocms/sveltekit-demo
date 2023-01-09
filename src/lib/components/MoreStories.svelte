@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { HomeContent$result } from '$houdini';
+	import type { HomeContent$result, PostContent$result } from '$houdini';
 	import PostPreview from './PostPreview.svelte';
 
-	export let posts: HomeContent$result['allPosts'];
+	export let posts: HomeContent$result['allPosts'] | PostContent$result['morePosts'];
 </script>
 
 <section>

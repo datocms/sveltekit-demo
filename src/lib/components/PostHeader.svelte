@@ -7,27 +7,27 @@
 	import PostTitle from './PostTitle.svelte';
 
 	export let title: string | null;
-	export let coverImage: { responsiveImage: ResponsiveImageFragment } | null;
+	export let coverImage: { responsiveImage: ResponsiveImageFragment | null } | null;
 	export let date: string | null;
 	export let author: HomeContent$result['allPosts'][number]['author'] | null = null;
 </script>
 
 <PostTitle>{title}</PostTitle>
 
-{#if author}	
+{#if author?.picture}	
 	<div class="hidden md:block md:mb-12">
 		<Avatar name={author.name} picture={author.picture} />
 	</div>
 {/if}
 
-{#if title && coverImage}
+{#if title && coverImage?.responsiveImage}
 	<div class="mb-8 md:mb-16 -mx-5 sm:mx-0">
 		<CoverImage {title} responsiveImage={coverImage.responsiveImage} />
 	</div>
 {/if}
 
 <div class="max-w-2xl mx-auto">
-	{#if author}
+	{#if author?.picture}
 		<div class="block md:hidden mb-6">
 			<Avatar name={author.name} picture={author.picture} />
 		</div>		

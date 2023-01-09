@@ -1,5 +1,6 @@
-<script lang="ts">
+<script lang="ts">	
 	import type { StructuredText as ST } from 'datocms-structured-text-utils';
+	
 	import StructuredText from './StructuredText.svelte';
 
 	export let content: ST;

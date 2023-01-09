@@ -12,7 +12,7 @@
 		type Node,
 	} from 'datocms-structured-text-utils';
 
-	import type { PostContent$result } from '$houdini';
+	import type { ImageBlockRecordFragment$data } from '$houdini';
 
 	import Paragraph from './nodes/Paragraph.svelte';
 	import Root from './nodes/Root.svelte';
@@ -25,13 +25,13 @@
 	import ListItem from './nodes/ListItem.svelte';
 
 	export let node: Node;
-	export let blocks: NonNullable<NonNullable<NonNullable<PostContent$result["post"]>["content"]>["blocks"]>;
+	export let blocks: ImageBlockRecordFragment$data[];
 
 	$: block = isBlock(node) && (blocks || []).find(({ id }) => isBlock(node) && id === node.item) || null;
 </script>
 
 <!-- Typescript doesn't infer the relationship between the component and `node` prop type.
-     So,  -->
+     So a list of `if`s seems to be a good option. -->
 {#if isRoot(node)}
 	<Root>
 		{#each node.children as child}
