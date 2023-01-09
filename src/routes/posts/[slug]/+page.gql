@@ -16,38 +16,17 @@ query PostContent($slug: String) {
 		title
 		slug
 		content {
-			value
-			blocks {
-				__typename
-				...ImageBlockRecordFragment
-			}
+			...StructuredTextFragment
 		}
 		date
 		ogImage: coverImage {
 			url(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 })
 		}
 		coverImage {
-			responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-				base64
-				src
-				width
-				height
-				alt
-				title
-			}
+			...ImageFragment
 		}
 		author {
-			name
-			picture {
-				responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 100, h: 100, sat: -100 }) {
-					base64
-					src
-					width
-					height
-					alt
-					title
-				}
-			}
+			...AuthorFragment
 		}
 	}
 
@@ -57,27 +36,10 @@ query PostContent($slug: String) {
 		excerpt
 		date
 		coverImage {
-			responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-				base64
-				src
-				width
-				height
-				alt
-				title
-			}
+			...ImageFragment
 		}
 		author {
-			name
-			picture {
-				responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 100, h: 100, sat: -100 }) {
-					base64
-					src
-					width
-					height
-					alt
-					title
-				}
-			}
+			...AuthorFragment
 		}
 	}
 }

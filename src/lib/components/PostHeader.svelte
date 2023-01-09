@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { HomeContent$result, ResponsiveImageFragment } from '$houdini';
+	import type { AuthorFragment, ImageFragment } from '$houdini';
 
 	import Avatar from './Avatar.svelte';
 	import Date from './Date.svelte';
@@ -7,29 +7,29 @@
 	import PostTitle from './PostTitle.svelte';
 
 	export let title: string | null;
-	export let coverImage: { responsiveImage: ResponsiveImageFragment | null } | null;
+	export let coverImage: ImageFragment | null;
 	export let date: string | null;
-	export let author: HomeContent$result['allPosts'][number]['author'] | null = null;
+	export let author: AuthorFragment | null = null;
 </script>
 
 <PostTitle>{title}</PostTitle>
 
-{#if author?.picture}	
+{#if author}	
 	<div class="hidden md:block md:mb-12">
-		<Avatar name={author.name} picture={author.picture} />
+		<Avatar {author} />
 	</div>
 {/if}
 
-{#if title && coverImage?.responsiveImage}
+{#if coverImage}
 	<div class="mb-8 md:mb-16 -mx-5 sm:mx-0">
-		<CoverImage {title} responsiveImage={coverImage.responsiveImage} />
+		<CoverImage {title} {coverImage} />
 	</div>
 {/if}
 
 <div class="max-w-2xl mx-auto">
-	{#if author?.picture}
+	{#if author}
 		<div class="block md:hidden mb-6">
-			<Avatar name={author.name} picture={author.picture} />
+			<Avatar {author} />
 		</div>		
 	{/if}
 	{#if date}

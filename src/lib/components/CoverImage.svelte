@@ -1,26 +1,27 @@
 <script lang="ts">
-	import { fragment, graphql, type ResponsiveImageFragment } from '$houdini';
+	import { fragment, graphql, ImageFragment } from '$houdini';
 
 	import Image from './Image.svelte';
 
-	export let responsiveImage: ResponsiveImageFragment;
+	export let coverImage: ImageFragment;
+	export let title: string | null = null;
+	export let slug: string | null = null;
 
-	$: responsiveImageFragment = fragment(
-		responsiveImage,
+	$: coverImageFragment = fragment(
+		coverImage,
 		graphql(`
-			fragment ResponsiveImageFragment on ResponsiveImage {
-				base64
-				src
-				width
-				height
-				alt
-				title
+			fragment ImageFragment on FileField {
+				responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+					base64
+					src
+					width
+					height
+					alt
+					title
+				}
 			}
 		`)
 	);
-
-	export let title: string | null = null;
-	export let slug: string | null = null;
 </script>
 
 <div class="-mx-5 sm:mx-0">
@@ -28,7 +29,7 @@
 		<a href={`/posts/${slug}`} aria-label={title}>
 			<Image
 				data={{
-					...$responsiveImageFragment,
+					...$coverImageFragment.responsiveImage,
 					alt: `Cover Image for ${title}`
 				}}
 				class="shadow-small hover:shadow-medium transition-shadow duration-200"
@@ -37,7 +38,7 @@
 	{:else}
 		<Image
 			data={{
-				...$responsiveImageFragment,
+				...$coverImageFragment.responsiveImage,
 				alt: `Cover Image for ${title}`
 			}}
 			class="shadow-small"

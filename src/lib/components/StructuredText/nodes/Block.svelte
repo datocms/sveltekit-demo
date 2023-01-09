@@ -1,13 +1,12 @@
 <script lang="ts">
-	import type { ImageBlockRecordFragment$data } from '$houdini';
+	import type { StructuredTextFragment$data } from '$houdini';
 	
 	import ImageBlockRecord from '../blocks/ImageBlockRecord.svelte';
 
-	export let block: ImageBlockRecordFragment$data;
-
-	$: ({ __typename } = block);
-
-	$: component = __typename === 'ImageBlockRecord' ? ImageBlockRecord : null;
+	export let block: StructuredTextFragment$data['blocks'][number] | null;
 </script>
 
-<svelte:component this={component} imageBlockRecord={block} />
+{#if block?.__typename === 'ImageBlockRecord'}
+	<ImageBlockRecord imageBlockRecord={block} />
+{/if}
+ 

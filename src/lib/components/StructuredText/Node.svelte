@@ -12,7 +12,7 @@
 		type Node,
 	} from 'datocms-structured-text-utils';
 
-	import type { ImageBlockRecordFragment$data } from '$houdini';
+	import type { StructuredTextFragment$data } from '$houdini';
 
 	import Paragraph from './nodes/Paragraph.svelte';
 	import Root from './nodes/Root.svelte';
@@ -25,7 +25,7 @@
 	import ListItem from './nodes/ListItem.svelte';
 
 	export let node: Node;
-	export let blocks: ImageBlockRecordFragment$data[];
+	export let blocks: StructuredTextFragment$data['blocks'];
 
 	$: block = isBlock(node) && (blocks || []).find(({ id }) => isBlock(node) && id === node.item) || null;
 </script>

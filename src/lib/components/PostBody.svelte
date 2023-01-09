@@ -1,9 +1,9 @@
-<script lang="ts">	
-	import type { StructuredText as ST } from 'datocms-structured-text-utils';
+<script lang="ts">
+	import type { StructuredTextFragment } from '$houdini';
 	
 	import StructuredText from './StructuredText.svelte';
 
-	export let content: ST;
+	export let content: StructuredTextFragment;
 </script>
 
 <div class="max-w-2xl mx-auto">

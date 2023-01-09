@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { HomeContent$result, PostContent$result } from '$houdini';
+	
 	import PostPreview from './PostPreview.svelte';
 
 	export let posts: HomeContent$result['allPosts'] | PostContent$result['morePosts'];

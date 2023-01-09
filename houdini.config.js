@@ -29,6 +29,9 @@ const config = {
 		},
 		FloatType: {
 			type: 'number'
+		},
+		UploadId: {
+			type: 'string'
 		}
 	}
 };

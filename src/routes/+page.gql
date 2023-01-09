@@ -21,17 +21,10 @@ query HomeContent {
 		excerpt
 		date
 		coverImage {
-			responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-				...ResponsiveImageFragment
-			}
+			...ImageFragment
 		}
 		author {
-			name
-			picture {
-				responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 100, h: 100, sat: -100 }) {
-					...ResponsiveImageFragment
-				}
-			}
+			...AuthorFragment
 		}
 	}
 }

@@ -12,7 +12,7 @@
 		/** The height of the image */
 		height?: Maybe<number>;
 		/** The width of the image */
-		width: number;
+		width?: number;
 		/** The aspect ratio (width/height) of the image */
 		aspectRatio?: number;
 		/** The HTML5 `sizes` attribute for the image */
@@ -36,6 +36,9 @@
 		intersecting: boolean;
 		loaded: boolean;
 	};
+
+	// See: https://github.com/sveltejs/language-tools/issues/1026#issuecomment-1002839154
+	const noTypeCheck = (x: any) => x;
 
 	const imageAddStrategy = ({ lazyLoad, intersecting, loaded }: State) => {
 		if (!lazyLoad) {
@@ -144,7 +147,7 @@
 	export let intersectionThreshold: number = 0;
 
 	/** Margin around the placeholder. Can have values similar to the CSS margin property (top, right, bottom, left). The values can be percentages. This set of values serves to grow or shrink each side of the placeholder element's bounding box before computing intersections */
-	export let intersectionMargin: string = "0px";
+	export let intersectionMargin: string = '0px';
 
 	/** Whether enable lazy loading or not */
 	let rawLazyLoad = true;
@@ -219,7 +222,12 @@
 	let transition = fadeInDuration > 0 ? `opacity ${fadeInDuration}ms` : undefined;
 </script>
 
-<IntersectionObserver {element} bind:intersecting threshold={intersectionThreshold} rootMargin={intersectionMargin}>
+<IntersectionObserver
+	{element}
+	bind:intersecting
+	threshold={intersectionThreshold}
+	rootMargin={intersectionMargin}
+>
 	<div
 		bind:this={element}
 		class={klass}
@@ -229,7 +237,7 @@
 		style:maxWidth={style.maxWidth ?? layout === 'intrinsic' ? data.width : null}
 		style:height={style.height ?? layout === 'fill' ? '100%' : null}
 	>
-		{#if layout !== 'fill'}
+		{#if layout !== 'fill' && width}
 			<Sizer {width} {height} {aspectRatio} />
 		{/if}
 
@@ -247,11 +255,7 @@
 		{#if addImage}
 			<picture style={pictureStyle}>
 				{#if data.webpSrcSet}
-					<Source
-						srcset={data.webpSrcSet}
-						sizes={sizes ?? data.sizes ?? null}
-						type="image/webp"
-					/>
+					<Source srcset={data.webpSrcSet} sizes={sizes ?? data.sizes ?? null} type="image/webp" />
 				{/if}
 				<Source
 					srcset={data.srcSet ?? buildSrcSet(data.src, data.width, srcSetCandidates) ?? null}
@@ -259,6 +263,10 @@
 				/>
 				{#if data.src}
 					<img
+						{...noTypeCheck({
+							// See: https://github.com/sveltejs/language-tools/issues/1026#issuecomment-1002839154
+							fetchpriority: priority ? 'high' : undefined,
+						})}
 						src={data.src}
 						alt={alt ?? data.alt ?? ''}
 						title={data.title ?? null}
@@ -266,7 +274,6 @@
 							dispatch('load');
 							loaded = true;
 						}}
-						fetchpriority={priority ? 'high' : undefined}
 						class={pictureClass}
 						style:opacity={showImage ? 1 : 0}
 						style:transition
