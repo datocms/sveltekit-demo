@@ -5,6 +5,7 @@
   "datocmsProjectId": "23796",
   "deploymentType": "static",
   "buildCommand": "npm run build",
+  "netlifyBuildDirectory": "build",
   "datocmsApiTokenEnvName": "PUBLIC_DATOCMS_API_TOKEN",
   "livePreviewUrl": "https://sveltekit-demo-eta.vercel.app/"
 }
