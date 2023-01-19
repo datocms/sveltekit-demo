@@ -16,8 +16,7 @@ import {
 	type UnsubscribeFn
 } from 'datocms-listen';
 
-import { PUBLIC_DATOCMS_API_TOKEN } from '$env/static/public';
-import { PREVIEW_MODE_COOKIE_NAME } from '$lib/preview';
+import { Preview, PREVIEW_MODE_COOKIE_NAME } from '$lib/preview';
 
 // This type is meant to store information about
 // the usage of the Real-time Updates.
@@ -75,8 +74,8 @@ export class QueryStoreWithPreviewSupport<
 
 	async fetch(...args: Parameters<QueryStore<_Data, _Input, _ExtraFields>['fetch']>) {
 		// Here, the `fetch` function which is used at the first fetch is stored
-		// as an attribute of the instance to pass it later as a fetcher to be used
-		// for subscription.
+		// as an attribute of the instance. The goal is to pass it later as a fetcher when subscribing to
+		// the GraphQL subscription channel.
 		const { context } = await fetchParams(this.artifact, this.storeName, { ...args[0] });
 		const { fetch } = context;
 
@@ -124,45 +123,56 @@ export class QueryStoreWithPreviewSupport<
 			}));
 
 			(async () => {
-				const unsubscribeFunction = await subscribeToQuery({
-					query: this.artifact.raw,
-					variables: this.lastVariables,
-					token: PUBLIC_DATOCMS_API_TOKEN,
-					preview: true,
-					fetcher: this.fetchFunction ?? fetch,
-					onStatusChange: (status) => {
-						// This function is called multiple times during the lifecycle of
-						// a subscription: `status` is expected to be `connecting` at first,
-						// the becoming `connected` once the connection to the channel has been
-						// espablished. Finally, when connction is closed, `status`	becomes `closed`.
-						this.store.update((storeState) => ({
-							...storeState,
-							connectionStatus: status
-						}));
-					},
-					onUpdate: (update) => {
-						// This is the main callback that updates store data when new data
-						// are pushed on the channel from the GraphQL server.
-						this.store.update((storeState) => ({
-							...storeState,
-							data: update.response.data,
-							error: null
-						}));
-					},
-					onChannelError: (error) => {
-						// In case of issues on the channel, we set data to `null`
-						// and make the error available for inspection.
-						this.store.update((storeState) => ({
-							...storeState,
-							data: null,
-							error: error
-						}));
-					}
-				});
+				const preview = (await (this.fetchFunction ?? fetch)('/preview').then((response) =>
+					response.json()
+				)) as Preview;
 
-				this.realTimeUpdatesApi = {
-					unsubscribeFunction
-				};
+				if (preview.enabled) {
+					const unsubscribeFunction = await subscribeToQuery({
+						query: this.artifact.raw,
+						variables: this.lastVariables,
+						// Here we use a different token,
+						// which is retrieved from the server and it's available
+						// only when the server recognize the content of preview cookie
+						// as the correct signature for the PREVIEW_MODE_ENCRYPTION_SECRET
+						// that only the server knows.
+						token: preview.token,
+						preview: true,
+						fetcher: this.fetchFunction ?? fetch,
+						onStatusChange: (status) => {
+							// This function is called multiple times during the lifecycle of
+							// a subscription: `status` is expected to be `connecting` at first,
+							// the becoming `connected` once the connection to the channel has been
+							// espablished. Finally, when connction is closed, `status`	becomes `closed`.
+							this.store.update((storeState) => ({
+								...storeState,
+								connectionStatus: status
+							}));
+						},
+						onUpdate: (update) => {
+							// This is the main callback that updates store data when new data
+							// are pushed on the channel from the GraphQL server.
+							this.store.update((storeState) => ({
+								...storeState,
+								data: update.response.data,
+								error: null
+							}));
+						},
+						onChannelError: (error) => {
+							// In case of issues on the channel, we set data to `null`
+							// and make the error available for inspection.
+							this.store.update((storeState) => ({
+								...storeState,
+								data: null,
+								error: error
+							}));
+						}
+					});
+
+					this.realTimeUpdatesApi = {
+						unsubscribeFunction
+					};
+				}
 			})();
 		}
 	}
