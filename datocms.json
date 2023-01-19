@@ -5,6 +5,23 @@
 	"datocmsProjectId": "23796",
 	"deploymentType": "static",
 	"buildCommand": "npm run build",
-	"datocmsApiTokenEnvName": "PUBLIC_DATOCMS_API_TOKEN",
+  "environmentVariables": {
+    "PREVIEW_MODE_ENCRYPTION_SECRET": {
+      "type": "string",
+      "value": "A random string to encrypt the preview mode cookie"
+    },
+    "PREVIEW_MODE_PASSWORD": {
+      "type": "string",
+      "value": "42"
+    },
+    "PUBLIC_DATOCMS_API_TOKEN": {
+      "type": "datocmsAccessToken",
+      "tokenName": "Bundle-safe, read-only token"
+    },
+    "DRAFT_ENABLED_DATOCMS_API_TOKEN": {
+      "type": "datocmsAccessToken",
+      "tokenName": "Draft-enabled, read-only token"
+    }
+  },
 	"livePreviewUrl": "https://sveltekit-demo-eta.vercel.app/"
 }

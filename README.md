@@ -22,6 +22,22 @@ Have a look at the end result live:
 
 [![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/sveltekit-demo)
 
+## Preview mode and deploy environment
+
+To take advantage of preview mode, deploy environment must support edge functions. That shouldn't be an issue: most of the providers have some form of edge function, these days.
+
+## Safety check before production
+
+If you use this demo as a starting point for a project and you plan to deploy to production, **take some time to understand how to properly configure secrets, so that no reserved information (like, for example, DatoCMS contents in draft status) gets leaked**.
+
+Before deploying to production, you should set the following 4 environment variables:
+
+* `PREVIEW_MODE_PASSWORD`: the password that users must have to enable preview mode;
+* `PUBLIC_DATOCMS_API_TOKEN`: a DatoCMS token with read-only permissions and no access to draft contents: this token can be included in the bundles produced by Nuxt at deploy;
+* `DRAFT_ENABLED_DATOCMS_API_TOKEN`: a DatoCMS token with read-only permissions and **access to draft contents**: this token will be potentially accessible only to users who have access to the preview mode (thus, only to people that know the preview mode password and are therefore expected to see draft contents);
+* `PREVIEW_MODE_ENCRYPTION_SECRET`: this secret is meant to sign the cookie that enables preview mode: it can be any random string.
+
+With these secrets in place, you can safely go to production. 
 ### Local setup
 
 Once the setup of the project and repo is done, clone the repo locally.
@@ -38,15 +54,7 @@ Next, copy the `.env.example` file in this directory to `.env` (which will be ig
 cp .env.example .env
 ```
 
-Then set each variable on `.env`:
-
-- `PUBLIC_DATOCMS_API_TOKEN` should be the API token you just copied.
-
-Your `.env` file should look like this:
-
-```bash
-PUBLIC_DATOCMS_API_TOKEN=...
-```
+Then set each variable in `.env`.
 
 ## Developing your project locally
 
