@@ -9,7 +9,18 @@ const config = {
 		}
 	},
 	plugins: {
-		'houdini-svelte': {}
+		'houdini-svelte': {
+			// This is the setting that gives the possibility to build
+			// the preview feature: by declaring here a custom store for GraphQL queries,
+			// Houdini inherits all the stores that are generated at build time.
+			// 
+			// Therefore, we can use the custom store to inject the desired behaviours:
+			// subscribe to a GraphQL channel and update the store contents when new data
+			// are pushed from the server.
+			customStores: {
+				query: '$lib/stores.QueryStoreWithPreviewSupport'
+			}
+		}
 	},
 	scalars: {
 		MetaTagAttributes: {
