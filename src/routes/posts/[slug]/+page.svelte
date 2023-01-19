@@ -15,7 +15,7 @@
 	$: ({ site, post, morePosts } = $PostContent.data || {
 		site: null,
 		post: null,
-		morePosts: [],
+		morePosts: []
 	});
 
 	$: headTags = post && site ? post.seo.concat(site.favicon) : [];
@@ -27,7 +27,7 @@
 	<Header />
 
 	<article>
-		{#if post}			
+		{#if post}
 			<PostHeader
 				title={post.title}
 				coverImage={post.coverImage}

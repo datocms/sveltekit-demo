@@ -24,8 +24,8 @@
 		`)
 	);
 
-	$: name = $authorFragment?.name
-	$: picture = $authorFragment?.picture
+	$: name = $authorFragment?.name;
+	$: picture = $authorFragment?.picture;
 </script>
 
 <div class="flex items-center">

@@ -14,7 +14,7 @@
 
 <PostTitle>{title}</PostTitle>
 
-{#if author}	
+{#if author}
 	<div class="hidden md:block md:mb-12">
 		<Avatar {author} />
 	</div>
@@ -30,7 +30,7 @@
 	{#if author}
 		<div class="block md:hidden mb-6">
 			<Avatar {author} />
-		</div>		
+		</div>
 	{/if}
 	{#if date}
 		<div class="mb-6 text-lg">

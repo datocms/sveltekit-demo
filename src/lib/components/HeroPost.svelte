@@ -33,7 +33,7 @@
 		<div>
 			<p class="text-lg leading-relaxed mb-4">{excerpt}</p>
 			{#if author}
-				<Avatar author={author} />
+				<Avatar {author} />
 			{/if}
 		</div>
 	</div>

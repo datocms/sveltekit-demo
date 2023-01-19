@@ -9,7 +9,7 @@
 		isParagraph,
 		isRoot,
 		isSpan,
-		type Node,
+		type Node
 	} from 'datocms-structured-text-utils';
 
 	import type { StructuredTextFragment$data } from '$houdini';
@@ -27,7 +27,8 @@
 	export let node: Node;
 	export let blocks: StructuredTextFragment$data['blocks'];
 
-	$: block = isBlock(node) && (blocks || []).find(({ id }) => isBlock(node) && id === node.item) || null;
+	$: block =
+		(isBlock(node) && (blocks || []).find(({ id }) => isBlock(node) && id === node.item)) || null;
 </script>
 
 <!-- Typescript doesn't infer the relationship between the component and `node` prop type.

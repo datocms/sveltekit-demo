@@ -1,10 +1,10 @@
 {
-  "name": "SvelteKit Blog",
-  "description": "Simple blog website built with SvelteKit and DatoCMS.",
-  "previewImage": "https://www.datocms-assets.com/205/1605198221-screenshot2020-11-12-next-js-blog-example-with-datocms-1.jpg?crop=top&fit=crop&h=500&w=600&auto=format",
-  "datocmsProjectId": "23796",
-  "deploymentType": "static",
-  "buildCommand": "npm run build",
-  "datocmsApiTokenEnvName": "PUBLIC_DATOCMS_API_TOKEN",
-  "livePreviewUrl": "https://sveltekit-demo-eta.vercel.app/"
+	"name": "SvelteKit Blog",
+	"description": "Simple blog website built with SvelteKit and DatoCMS.",
+	"previewImage": "https://www.datocms-assets.com/205/1605198221-screenshot2020-11-12-next-js-blog-example-with-datocms-1.jpg?crop=top&fit=crop&h=500&w=600&auto=format",
+	"datocmsProjectId": "23796",
+	"deploymentType": "static",
+	"buildCommand": "npm run build",
+	"datocmsApiTokenEnvName": "PUBLIC_DATOCMS_API_TOKEN",
+	"livePreviewUrl": "https://sveltekit-demo-eta.vercel.app/"
 }

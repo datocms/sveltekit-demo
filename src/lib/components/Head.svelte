@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let headTags: { tag: string; content: string | null; attributes: {} | null; }[] = [];
+	export let headTags: { tag: string; content: string | null; attributes: object | null }[] = [];
 
 	$: titleTag = headTags && headTags.find((t) => t.tag === 'title');
 	$: metaTags = headTags ? headTags.filter((t) => t.tag === 'meta') : [];

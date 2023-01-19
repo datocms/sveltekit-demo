@@ -6,7 +6,7 @@
 	export let objectFit: CSS.Properties['objectFit'];
 	export let objectPosition: CSS.Properties['objectPosition'];
 	export let showImage: boolean;
-	export let fadeInDuration: number = 0;
+	export let fadeInDuration = 0;
 
 	let transition = fadeInDuration > 0 ? `opacity ${fadeInDuration}ms` : undefined;
 	let opacity = showImage ? 0 : 1;

@@ -38,7 +38,7 @@
 	};
 
 	// See: https://github.com/sveltejs/language-tools/issues/1026#issuecomment-1002839154
-	const noTypeCheck = (x: any) => x;
+	const noTypeCheck = (x: object) => x;
 
 	const imageAddStrategy = ({ lazyLoad, intersecting, loaded }: State) => {
 		if (!lazyLoad) {
@@ -124,7 +124,7 @@
 	const dispatch = createEventDispatcher();
 
 	let element: HTMLDivElement;
-	let intersecting: boolean = false;
+	let intersecting = false;
 
 	let loaded = false;
 
@@ -141,20 +141,20 @@
 	export let pictureClass: string | null = null;
 
 	/** Duration (in ms) of the fade-in transition effect upoad image loading */
-	export let fadeInDuration: number = 500;
+	export let fadeInDuration = 500;
 
 	/** Indicate at what percentage of the placeholder visibility the loading of the image should be triggered. A value of 0 means that as soon as even one pixel is visible, the callback will be run. A value of 1.0 means that the threshold isn't considered passed until every pixel is visible */
-	export let intersectionThreshold: number = 0;
+	export let intersectionThreshold = 0;
 
 	/** Margin around the placeholder. Can have values similar to the CSS margin property (top, right, bottom, left). The values can be percentages. This set of values serves to grow or shrink each side of the placeholder element's bounding box before computing intersections */
-	export let intersectionMargin: string = '0px';
+	export let intersectionMargin: '0px';
 
 	/** Whether enable lazy loading or not */
 	let rawLazyLoad = true;
 	export { rawLazyLoad as lazyLoad };
 
 	/** Additional CSS rules to add to the root node */
-	export let style: Record<string, any> = {};
+	export let style: Record<string, string> = {};
 
 	/** Additional CSS rules to add to the image inside the `<picture />` tag */
 	export let pictureStyle: string | null = null;
@@ -178,7 +178,7 @@
 	export let objectPosition: CSS.Properties['objectPosition'] = undefined;
 
 	/** Whether the component should use a blurred image placeholder */
-	export let usePlaceholder: boolean = true;
+	export let usePlaceholder = true;
 
 	/**
 	 * The HTML5 `sizes` attribute for the image
@@ -265,7 +265,7 @@
 					<img
 						{...noTypeCheck({
 							// See: https://github.com/sveltejs/language-tools/issues/1026#issuecomment-1002839154
-							fetchpriority: priority ? 'high' : undefined,
+							fetchpriority: priority ? 'high' : undefined
 						})}
 						src={data.src}
 						alt={alt ?? data.alt ?? ''}

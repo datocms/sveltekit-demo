@@ -3,6 +3,7 @@
 This is a demo of how to use SvelteKit and DatoCMS together.
 
 The purpose of this repo is to have a quick start reference that can be set up with the "one-click" button below.
+
 ## Demo
 
 Have a look at the end result live:

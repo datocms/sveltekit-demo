@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { StructuredTextFragment } from '$houdini';
-	
+
 	import StructuredText from './StructuredText.svelte';
 
 	export let content: StructuredTextFragment;
