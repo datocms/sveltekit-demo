@@ -32,12 +32,13 @@ If you use this demo as a starting point for a project and you plan to deploy to
 
 Before deploying to production, you should set the following 4 environment variables:
 
-* `PREVIEW_MODE_PASSWORD`: the password that users must have to enable preview mode;
-* `PUBLIC_DATOCMS_API_TOKEN`: a DatoCMS token with read-only permissions and no access to draft contents: this token can be included in the bundles produced by Nuxt at deploy;
-* `DRAFT_ENABLED_DATOCMS_API_TOKEN`: a DatoCMS token with read-only permissions and **access to draft contents**: this token will be potentially accessible only to users who have access to the preview mode (thus, only to people that know the preview mode password and are therefore expected to see draft contents);
-* `PREVIEW_MODE_ENCRYPTION_SECRET`: this secret is meant to sign the cookie that enables preview mode: it can be any random string.
+- `PREVIEW_MODE_PASSWORD`: the password that users must have to enable preview mode;
+- `PUBLIC_DATOCMS_API_TOKEN`: a DatoCMS token with read-only permissions and no access to draft contents: this token can be included in the bundles produced by Nuxt at deploy;
+- `DRAFT_ENABLED_DATOCMS_API_TOKEN`: a DatoCMS token with read-only permissions and **access to draft contents**: this token will be potentially accessible only to users who have access to the preview mode (thus, only to people that know the preview mode password and are therefore expected to see draft contents);
+- `PREVIEW_MODE_ENCRYPTION_SECRET`: this secret is meant to sign the cookie that enables preview mode: it can be any random string.
 
-With these secrets in place, you can safely go to production. 
+With these secrets in place, you can safely go to production.
+
 ### Local setup
 
 Once the setup of the project and repo is done, clone the repo locally.
