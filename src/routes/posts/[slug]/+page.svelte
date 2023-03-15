@@ -36,7 +36,7 @@
 			/>
 
 			{#if post.content}
-				<PostBody content={post.content} />
+				<PostBody structuredText={post.content} />
 			{/if}
 		{/if}
 	</article>

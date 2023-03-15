@@ -23,8 +23,8 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"graphql": "^15.8.0",
-		"houdini": "^0.19.4",
-		"houdini-svelte": "^0.19.4",
+		"houdini": "^0.20.4",
+		"houdini-svelte": "^0.20.4",
 		"postcss": "^8.4.20",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@datocms/svelte": "^0.0.1",
 		"date-fns": "^2.29.3",
 		"datocms-listen": "^0.1.14",
 		"datocms-structured-text-utils": "^2.0.4",

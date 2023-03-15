@@ -2530,7 +2530,7 @@ input StringFilter {
   eq: String
 
   """
-  Filter records with the specified field defined (i.e. with any value) or not
+  Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED]
   """
   exists: BooleanType
 
@@ -2541,6 +2541,11 @@ input StringFilter {
   Filter records with the specified field set as blank (null or empty string)
   """
   isBlank: BooleanType
+
+  """
+  Filter records with the specified field present (neither null, nor empty string)
+  """
+  isPresent: BooleanType
 
   """Filter records based on a regular expression"""
   matches: StringMatchesFilter
@@ -2564,7 +2569,7 @@ input StringMatchesFilter {
 """Specifies how to filter Structured Text fields"""
 input StructuredTextFilter {
   """
-  Filter records with the specified field defined (i.e. with any value) or not
+  Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED]
   """
   exists: BooleanType
 
@@ -2572,6 +2577,11 @@ input StructuredTextFilter {
   Filter records with the specified field set as blank (null or single empty paragraph)
   """
   isBlank: BooleanType
+
+  """
+  Filter records with the specified field present (neither null, nor empty string)
+  """
+  isPresent: BooleanType
 
   """Filter records based on a regular expression"""
   matches: StringMatchesFilter
