@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { StructuredTextFragment$data } from '$houdini';
 
-	import Image from '$lib/components/Image.svelte';
+	import { Image } from '@datocms/svelte';
 
 	export let imageBlockRecord: StructuredTextFragment$data['blocks'][number];
 </script>

@@ -2530,7 +2530,7 @@ input StringFilter {
   eq: String
 
   """
-  Filter records with the specified field defined (i.e. with any value) or not
+  Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED]
   """
   exists: BooleanType
 
@@ -2564,7 +2564,7 @@ input StringMatchesFilter {
 """Specifies how to filter Structured Text fields"""
 input StructuredTextFilter {
   """
-  Filter records with the specified field defined (i.e. with any value) or not
+  Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED]
   """
   exists: BooleanType
 

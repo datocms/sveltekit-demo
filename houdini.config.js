@@ -2,12 +2,14 @@
 
 /** @type {import('houdini').ConfigFile} */
 const config = {
-	apiUrl: 'https://graphql.datocms.com',
+	apiUrl: 'https://graphql.datocms.com/',
+
 	schemaPollHeaders: {
 		Authorization(env) {
 			return `Bearer ${env.PUBLIC_DATOCMS_API_TOKEN}`;
 		}
 	},
+
 	plugins: {
 		'houdini-svelte': {
 			// This is the setting that gives the possibility to build
