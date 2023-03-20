@@ -1,4 +1,4 @@
-query PostContent($slug: String) {
+query PostContent($slug: String) @cache(partial: true) {
 	site: _site {
 		favicon: faviconMetaTags {
 			attributes

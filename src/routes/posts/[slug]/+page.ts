@@ -1,9 +1,11 @@
-import type { RouteParams, PostContentVariables } from './$houdini';
+import { PostContentStore } from '$houdini';
 
 export const prerender = true;
 
-export const _PostContentVariables: PostContentVariables = ({
-	params: { slug }
-}: {
-	params: RouteParams;
-}) => ({ slug });
+export const load = async (event) => {
+	const query = new PostContentStore();
+
+	const { data } = await query.fetch({ event });
+
+	return { PostContent: { data } };
+};

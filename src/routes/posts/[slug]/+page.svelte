@@ -12,7 +12,7 @@
 	export let data: PageData;
 
 	$: ({ PostContent } = data);
-	$: ({ site, post, morePosts } = $PostContent.data || {
+	$: ({ site, post, morePosts } = PostContent.data || {
 		site: null,
 		post: null,
 		morePosts: []
