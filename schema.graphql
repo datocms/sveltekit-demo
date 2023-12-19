@@ -1,4 +1,5 @@
 input AuthorModelFilter {
+  AND: [AuthorModelFilter]
   OR: [AuthorModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
@@ -39,13 +40,16 @@ enum AuthorModelOrderBy {
 """Record of type Author (author)"""
 type AuthorRecord implements RecordInterface {
   _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
   _modelApiKey: String!
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -61,13 +65,16 @@ type AuthorRecord implements RecordInterface {
 """Record of type Blog (blog)"""
 type BlogRecord implements RecordInterface {
   _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
   _modelApiKey: String!
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -89,6 +96,7 @@ input BooleanFilter {
 scalar BooleanType
 
 input CategoryModelFilter {
+  AND: [CategoryModelFilter]
   OR: [CategoryModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
@@ -129,13 +137,16 @@ enum CategoryModelOrderBy {
 """Record of type Category (category)"""
 type CategoryRecord implements RecordInterface {
   _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
   _modelApiKey: String!
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -170,6 +181,7 @@ enum ColorBucketType {
 type ColorField {
   alpha: IntType!
   blue: IntType!
+  cssRgb: String!
   green: IntType!
   hex: String!
   red: IntType!
@@ -261,6 +273,11 @@ enum FaviconType {
 
 type FileField implements FileFieldInterface {
   _createdAt: DateTime!
+
+  """
+  The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request
+  """
+  _editingUrl: String
   _updatedAt: DateTime!
   alt(
     """
@@ -282,7 +299,7 @@ type FileField implements FileFieldInterface {
     """
     punch: Float! = 1
 
-    """JPEG quality (defaults to 70%)"""
+    """Image quality (defaults to 70%)"""
     quality: Int! = 70
 
     """Maximum image dimension (defaults to 24px)"""
@@ -335,6 +352,7 @@ type FileField implements FileFieldInterface {
   size: IntType!
   smartTags: [String!]!
   tags: [String!]!
+  thumbhash: String
   title(
     """
     If you want to fallback to a default translation when a translation has not been found
@@ -354,6 +372,11 @@ type FileField implements FileFieldInterface {
 
 interface FileFieldInterface {
   _createdAt: DateTime!
+
+  """
+  The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request
+  """
+  _editingUrl: String
   _updatedAt: DateTime!
   alt(
     """
@@ -375,7 +398,7 @@ interface FileFieldInterface {
     """
     punch: Float! = 1
 
-    """JPEG quality (defaults to 70%)"""
+    """Image quality (defaults to 70%)"""
     quality: Int! = 70
 
     """Maximum image dimension (defaults to 24px)"""
@@ -428,6 +451,7 @@ interface FileFieldInterface {
   size: IntType!
   smartTags: [String!]!
   tags: [String!]!
+  thumbhash: String
   title(
     """
     If you want to fallback to a default translation when a translation has not been found
@@ -485,13 +509,16 @@ type GlobalSeoField {
 """Block of type Image block (image_block)"""
 type ImageBlockRecord implements RecordInterface {
   _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
   _modelApiKey: String!
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -532,6 +559,15 @@ input ImgixParams {
   [Open Imgix reference »](https://docs.imgix.com/apis/url/bg)
   """
   bg: String
+
+  """
+  Background Removal
+  
+  Removes background from image.
+  
+  [Open Imgix reference »](https://docs.imgix.com/apis/rendering/background-removal/bg-remove)
+  """
+  bgRemove: BooleanType
 
   """
   Blend
@@ -1035,6 +1071,20 @@ input ImgixParams {
   fpZ: FloatType
 
   """
+  Frames Per Second
+  
+  Specifies the framerate of the generated image.
+  """
+  fps: IntType
+
+  """
+  Frame Selection
+  
+  Specifies the frame of an animated image to use.
+  """
+  frame: String
+
+  """
   Gamma
   
   Adjusts the gamma of the source image.
@@ -1042,6 +1092,13 @@ input ImgixParams {
   [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/gam)
   """
   gam: IntType
+
+  """
+  Animated Gif Quality
+  
+  Depends on: `fm=gif`
+  """
+  gifQ: IntType
 
   """
   Grid Colors
@@ -1098,6 +1155,13 @@ input ImgixParams {
   hue: IntType
 
   """
+  Frame Interval
+  
+  Displays every Nth frame starting with the first frame.
+  """
+  interval: IntType
+
+  """
   Invert
   
   Inverts the colors on the source image.
@@ -1112,6 +1176,13 @@ input ImgixParams {
   Determine if IPTC data should be passed for JPEG images.
   """
   iptc: ImgixParamsIptc
+
+  """
+  Animation Loop Count
+  
+  Specifies the number of times an animated image should repeat. A value of 0 means infinite looping.
+  """
+  loop: IntType
 
   """
   Lossless Compression
@@ -1476,6 +1547,13 @@ input ImgixParams {
   rect: String
 
   """
+  Reverse
+  
+  Reverses the frame order on the source animation.
+  """
+  reverse: BooleanType
+
+  """
   Rotation
   
   Rotates an image by a specified number of degrees.
@@ -1519,6 +1597,13 @@ input ImgixParams {
   [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/sharp)
   """
   sharp: FloatType
+
+  """
+  Frame Skip
+  
+  Skips every Nth frame starting with the first frame.
+  """
+  skip: IntType
 
   """
   Transparency
@@ -2088,6 +2173,7 @@ type PostModelContentField {
 }
 
 input PostModelFilter {
+  AND: [PostModelFilter]
   OR: [PostModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
@@ -2140,13 +2226,16 @@ enum PostModelOrderBy {
 """Record of type Post (post)"""
 type PostRecord implements RecordInterface {
   _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
   _modelApiKey: String!
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -2209,10 +2298,6 @@ input PublishedAtFilter {
 type Query {
   """Returns meta information regarding a record collection"""
   _allAuthorsMeta(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
     filter: AuthorModelFilter
 
     """The locale to use to fetch the field's content"""
@@ -2221,10 +2306,6 @@ type Query {
 
   """Returns meta information regarding a record collection"""
   _allCategoriesMeta(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
     filter: CategoryModelFilter
 
     """The locale to use to fetch the field's content"""
@@ -2233,10 +2314,6 @@ type Query {
 
   """Returns meta information regarding a record collection"""
   _allPostsMeta(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
     filter: PostModelFilter
 
     """The locale to use to fetch the field's content"""
@@ -2249,7 +2326,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-  ): CollectionMetadata
+  ): CollectionMetadata!
 
   """Returns the single instance record"""
   _site(
@@ -2404,13 +2481,16 @@ type Query {
 
 interface RecordInterface {
   _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
   _modelApiKey: String!
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -2566,7 +2646,7 @@ input StringMatchesFilter {
   regexp: BooleanType = true
 }
 
-"""Specifies how to filter Structured Text fields"""
+"""Specifies how to filter Structured Text fields values"""
 input StructuredTextFilter {
   """
   Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED]
@@ -2767,6 +2847,7 @@ input UploadFilenameFilter {
 }
 
 input UploadFilter {
+  AND: [UploadFilter]
   OR: [UploadFilter]
   _createdAt: UploadCreatedAtFilter
   _updatedAt: UploadUpdatedAtFilter

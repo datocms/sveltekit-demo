@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { AuthorFragment, fragment, graphql } from '$houdini';
 
-	import { Image } from "@datocms/svelte";
+	import { Image } from '@datocms/svelte';
 
 	export let author: AuthorFragment | null = null;
 
