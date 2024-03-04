@@ -15,7 +15,7 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 
 	// Check the secret
 	if (allParams.get('secret') !== PREVIEW_MODE_PASSWORD) {
-		throw error(401, 'Missing or invalid `secret` query string parameter!');
+		error(401, 'Missing or invalid `secret` query string parameter!');
 	}
 
 	const hash = await previewModeEncryptionSecretHash(PREVIEW_MODE_ENCRYPTION_SECRET);
@@ -33,5 +33,5 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 	// string parameter:
 	const redirectUrl = redirectParam ?? '/';
 
-	throw redirect(302, redirectUrl);
+	redirect(302, redirectUrl);
 };

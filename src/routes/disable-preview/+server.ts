@@ -14,5 +14,5 @@ export const GET: RequestHandler = async ({ cookies }) => {
 
 	const redirectUrl = '/';
 
-	throw redirect(302, redirectUrl);
+	redirect(302, redirectUrl);
 };
