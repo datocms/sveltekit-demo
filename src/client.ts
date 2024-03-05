@@ -63,8 +63,8 @@ const realTimeUpdatesApiPluginForPreviewMode: ClientPlugin = () => {
 								partial: true,
 								source: DataSource.Network,
 								stale: false,
-								variables: ctx.variables ?? {},
-							})
+								variables: ctx.variables ?? {}
+							});
 						},
 						onChannelError: (error) => {
 							resolve(ctx, {
@@ -74,8 +74,8 @@ const realTimeUpdatesApiPluginForPreviewMode: ClientPlugin = () => {
 								partial: true,
 								source: DataSource.Network,
 								stale: false,
-								variables: ctx.variables ?? {},
-							})
+								variables: ctx.variables ?? {}
+							});
 						}
 					});
 
@@ -91,8 +91,8 @@ const realTimeUpdatesApiPluginForPreviewMode: ClientPlugin = () => {
 			next(ctx);
 		},
 		cleanup() {
-			realTimeUpdatesApi?.unsubscribeFunction?.()
-		},
+			realTimeUpdatesApi?.unsubscribeFunction?.();
+		}
 	};
 };
 
