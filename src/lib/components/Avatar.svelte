@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AuthorFragment, fragment, graphql } from '$houdini';
+	import { type AuthorFragment, fragment, graphql } from '$houdini';
 
 	import { Image } from '@datocms/svelte';
 
