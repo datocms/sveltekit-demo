@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fragment, graphql, ImageFragment } from '$houdini';
+	import { fragment, graphql, type ImageFragment } from '$houdini';
 
 	import { Image } from '@datocms/svelte';
 
