@@ -18,7 +18,7 @@
       "type": "datocmsAccessToken",
       "tokenName": "CDA Only (Published)"
     },
-    "PRIVATE_DATOCMS_DRAFT_CONTENT_CDA_TOKEN": {
+    "DATOCMS_DRAFT_CONTENT_CDA_TOKEN": {
       "type": "datocmsAccessToken",
       "tokenName": "CDA Only (Draft)"
     }

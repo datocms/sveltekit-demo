@@ -44,7 +44,7 @@ Before deploying to production, you should set the following 4 environment varia
 
 - `PREVIEW_MODE_PASSWORD`: the password that users must have to enable preview mode;
 - `PUBLIC_DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN`: a DatoCMS `CDA Only (Published)` token. This token can be included in browser bundles;
-- `PRIVATE_DATOCMS_DRAFT_CONTENT_CDA_TOKEN`: a DatoCMS `CDA Only (Draft)` token. This token stays in private server env and is returned only to requests gated by preview mode;
+- `DATOCMS_DRAFT_CONTENT_CDA_TOKEN`: a DatoCMS `CDA Only (Draft)` token. This token stays in private server env and is returned only to requests gated by preview mode;
 - `PREVIEW_MODE_ENCRYPTION_SECRET`: this secret is meant to sign the cookie that enables preview mode: it can be any random string.
 
 With these secrets in place, you can safely go to production.
