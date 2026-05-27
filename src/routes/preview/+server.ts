@@ -2,7 +2,7 @@ import { type RequestHandler, json } from '@sveltejs/kit';
 
 import {
 	PREVIEW_MODE_ENCRYPTION_SECRET,
-	DRAFT_ENABLED_DATOCMS_API_TOKEN
+	PRIVATE_DATOCMS_DRAFT_CONTENT_CDA_TOKEN
 } from '$env/static/private';
 
 import { previewModeEncryptionSecretHash, PREVIEW_MODE_COOKIE_NAME } from '$lib/preview';
@@ -19,7 +19,7 @@ export const GET = (async ({ cookies }) => {
 	if (cookie === hash) {
 		return json({
 			enabled: true,
-			token: DRAFT_ENABLED_DATOCMS_API_TOKEN
+			token: PRIVATE_DATOCMS_DRAFT_CONTENT_CDA_TOKEN
 		});
 	}
 

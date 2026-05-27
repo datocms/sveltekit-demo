@@ -1,27 +1,27 @@
 {
-	"name": "SvelteKit Blog",
-	"description": "Simple blog website built with SvelteKit and DatoCMS.",
-	"previewImage": "https://www.datocms-assets.com/205/1605198221-screenshot2020-11-12-next-js-blog-example-with-datocms-1.jpg?crop=top&fit=crop&h=500&w=600&auto=format",
-	"datocmsProjectId": "23796",
-	"deploymentType": "static",
-	"buildCommand": "npm run build",
-	"environmentVariables": {
-		"PREVIEW_MODE_ENCRYPTION_SECRET": {
-			"type": "string",
-			"value": "A random string to encrypt the preview mode cookie"
-		},
-		"PREVIEW_MODE_PASSWORD": {
-			"type": "string",
-			"value": "42"
-		},
-		"PUBLIC_DATOCMS_API_TOKEN": {
-			"type": "datocmsAccessToken",
-			"tokenName": "Bundle-safe, read-only token"
-		},
-		"DRAFT_ENABLED_DATOCMS_API_TOKEN": {
-			"type": "datocmsAccessToken",
-			"tokenName": "Draft-enabled, read-only token"
-		}
-	},
-	"livePreviewUrl": "https://sveltekit-demo-eta.vercel.app/"
+  "name": "SvelteKit Blog",
+  "description": "Simple blog website built with SvelteKit and DatoCMS.",
+  "previewImage": "https://www.datocms-assets.com/205/1605198221-screenshot2020-11-12-next-js-blog-example-with-datocms-1.jpg?crop=top&fit=crop&h=500&w=600&auto=format",
+  "datocmsProjectId": "23796",
+  "deploymentType": "static",
+  "buildCommand": "npm run build",
+  "environmentVariables": {
+    "PREVIEW_MODE_ENCRYPTION_SECRET": {
+      "type": "string",
+      "value": "A random string to encrypt the preview mode cookie"
+    },
+    "PREVIEW_MODE_PASSWORD": {
+      "type": "string",
+      "value": "42"
+    },
+    "PUBLIC_DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN": {
+      "type": "datocmsAccessToken",
+      "tokenName": "CDA Only (Published)"
+    },
+    "PRIVATE_DATOCMS_DRAFT_CONTENT_CDA_TOKEN": {
+      "type": "datocmsAccessToken",
+      "tokenName": "CDA Only (Draft)"
+    }
+  },
+  "livePreviewUrl": "https://sveltekit-demo-eta.vercel.app/"
 }

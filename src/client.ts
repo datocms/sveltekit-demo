@@ -2,7 +2,7 @@ import { subscribeToQuery, type UnsubscribeFn } from 'datocms-listen';
 
 import { HoudiniClient, isBrowser, type ClientPlugin, DataSource } from '$houdini';
 
-import { PUBLIC_DATOCMS_API_TOKEN } from '$env/static/public';
+import { PUBLIC_DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN } from '$env/static/public';
 
 import { PREVIEW_MODE_COOKIE_NAME, type Preview } from '$lib/preview';
 
@@ -102,7 +102,7 @@ export default new HoudiniClient({
 	fetchParams() {
 		return {
 			headers: {
-				Authorization: `Bearer ${PUBLIC_DATOCMS_API_TOKEN}`
+				Authorization: `Bearer ${PUBLIC_DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN}`
 			}
 		};
 	},

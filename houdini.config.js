@@ -6,7 +6,7 @@ const config = {
 		url: 'https://graphql.datocms.com/',
 
 		headers(env) {
-			return { Authorization: `Bearer ${env.PUBLIC_DATOCMS_API_TOKEN}` };
+			return { Authorization: `Bearer ${env.PUBLIC_DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN}` };
 		}
 	},
 	plugins: {

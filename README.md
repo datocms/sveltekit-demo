@@ -43,8 +43,8 @@ If you use this demo as a starting point for a project and you plan to deploy to
 Before deploying to production, you should set the following 4 environment variables:
 
 - `PREVIEW_MODE_PASSWORD`: the password that users must have to enable preview mode;
-- `PUBLIC_DATOCMS_API_TOKEN`: a DatoCMS token with read-only permissions and no access to draft contents: this token can be included in the bundles produced by Nuxt at deploy;
-- `DRAFT_ENABLED_DATOCMS_API_TOKEN`: a DatoCMS token with read-only permissions and **access to draft contents**: this token will be potentially accessible only to users who have access to the preview mode (thus, only to people that know the preview mode password and are therefore expected to see draft contents);
+- `PUBLIC_DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN`: a DatoCMS `CDA Only (Published)` token. This token can be included in browser bundles;
+- `PRIVATE_DATOCMS_DRAFT_CONTENT_CDA_TOKEN`: a DatoCMS `CDA Only (Draft)` token. This token stays in private server env and is returned only to requests gated by preview mode;
 - `PREVIEW_MODE_ENCRYPTION_SECRET`: this secret is meant to sign the cookie that enables preview mode: it can be any random string.
 
 With these secrets in place, you can safely go to production.
@@ -57,7 +57,7 @@ Once the setup of the project and repo is done, clone the repo locally.
 
 In your DatoCMS' project, go to the **Settings** menu at the top and click **API tokens**.
 
-Then click **Bundle-safe, read-only token** and copy the token.
+Create two DatoCMS API tokens: `CDA Only (Published)` and `CDA Only (Draft)`.
 
 Next, copy the `.env.example` file in this directory to `.env` (which will be ignored by Git):
 
